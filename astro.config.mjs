@@ -19,7 +19,7 @@ export default defineConfig({
       },
     },
   },
-  site: 'https://kuber-code.github.io',
+  site: 'https://example.com',
   output: 'static',
   i18n: {
     defaultLocale: 'en',
