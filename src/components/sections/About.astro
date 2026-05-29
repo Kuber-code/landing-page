@@ -96,7 +96,14 @@ const { locale } = Astro.props;
   .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
   .about__cv { align-self: flex-start; margin-top: 16px; }
 
+  /* ---- Tablet: stack portrait above text so the desktop range visibly responds ---- */
+  @media (max-width: 1024px) {
+    .about__grid { grid-template-columns: 1fr; gap: 48px; }
+    .about__photo { max-width: 360px; }
+  }
+
   @media (max-width: 768px) {
     .about__grid { grid-template-columns: 1fr; }
+    .about__stats { grid-template-columns: repeat(3, 1fr); }
   }
 </style>

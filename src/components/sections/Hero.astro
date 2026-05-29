@@ -146,6 +146,14 @@ const initial = DEFAULT_TWEAKS.headline;
     display: none;
   }
 
+  /* ---- Tablet: stack the split hero so the desktop range visibly responds ---- */
+  @media (max-width: 1024px) {
+    .hero__inner { grid-template-columns: 1fr; gap: 48px; align-items: start; }
+    :global([data-hero='split']) .hero__inner,
+    :global([data-hero='editorial']) .hero__inner { grid-template-columns: 1fr; }
+    :global([data-hero='split']) .hero__media { min-height: 360px; }
+  }
+
   @media (max-width: 768px) {
     .hero__inner { grid-template-columns: 1fr !important; gap: 40px; }
     .hero__meta { grid-template-columns: repeat(2, 1fr) !important; }
