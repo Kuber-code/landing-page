@@ -1,0 +1,25 @@
+---
+interface Props {
+  withRule?: boolean;
+  class?: string;
+}
+const { withRule = false, class: className = '' } = Astro.props;
+---
+
+<div class={`eyebrow eyebrow-row ${className}`}>
+  {withRule && <span class="sep" aria-hidden="true"></span>}
+  <span><slot /></span>
+</div>
+
+<style>
+  .eyebrow-row {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .sep {
+    width: 24px;
+    height: 1px;
+    background: var(--accent);
+  }
+</style>

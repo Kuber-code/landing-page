@@ -1,0 +1,152 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { getCollection } from 'astro:content';
+import { LOCALES, type Locale } from '@/types';
+import { Image } from 'astro:assets';
+import { localize, type LocalizedProject } from '@lib/projects';
+import { getProjectImages } from '@lib/projectImages';
+import { pad } from '@lib/utils';
+import { localized, t } from '@i18n';
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { Link, PlaceholderMedia } from '@components/ui';
+
+export const getStaticPaths = (async () => {
+  const entries = await getCollection('projects');
+  return LOCALES.flatMap((locale) =>
+    entries.map((entry) => ({
+      params: { locale, slug: entry.id },
+      props: { project: localize(entry, locale) },
+    })),
+  );
+}) satisfies GetStaticPaths;
+
+interface Props { project: LocalizedProject }
+const { project } = Astro.props;
+const locale = Astro.params.locale as Locale;
+const backHref = `${localized(locale, '/')}#work`;
+const images = getProjectImages(project.slug);
+---
+
+<BaseLayout locale={locale} title={`${project.name} — ${t(locale, 'brand')}`}>
+  <article class="project-page">
+    <div class="container">
+      <Link href={backHref}>{t(locale, 'project.back')}</Link>
+
+      <header class="head">
+        <div>
+          <div class="cat">{project.cat}</div>
+          <h1 transition:name={`title-${project.slug}`}>{project.name}</h1>
+        </div>
+        <dl class="meta">
+          <dt>{t(locale, 'modal.year')}</dt><dd>{project.year}</dd>
+          <dt>{t(locale, 'modal.location')}</dt><dd>{project.location}</dd>
+          <dt>{t(locale, 'modal.role')}</dt><dd>{project.role}</dd>
+        </dl>
+      </header>
+
+      <div class="body">
+        <div class="gallery">
+          {
+            images.length > 0 ? (
+              images.map((img, i) => (
+                <div class="media gallery__item" style="aspect-ratio: 3/2;">
+                  <Image
+                    src={img}
+                    alt={`${project.name} · ${pad(i + 1)}`}
+                    widths={[640, 1024]}
+                    sizes="(max-width: 768px) 100vw, 60vw"
+                    loading={i === 0 ? 'eager' : 'lazy'}
+                  />
+                </div>
+              ))
+            ) : (
+              <>
+                <PlaceholderMedia label={`${project.name} · view 01`} aspect="3/2" class="gallery__hero" />
+                <PlaceholderMedia label={`${project.name} · plan / detail`} aspect="4/3" />
+                <PlaceholderMedia label={`${project.name} · view 02`} aspect="16/9" />
+              </>
+            )
+          }
+        </div>
+
+        <aside class="text">
+          {project.description.map((p) => <p>{p}</p>)}
+
+          <dl class="facts">
+            <div><dt>{t(locale, 'modal.type')}</dt><dd>{project.type}</dd></div>
+            <div><dt>{t(locale, 'modal.area')}</dt><dd>{project.area}</dd></div>
+            <div><dt>{t(locale, 'modal.status')}</dt><dd>{project.status}</dd></div>
+            <div><dt>{t(locale, 'modal.team')}</dt><dd>{project.team}</dd></div>
+          </dl>
+        </aside>
+      </div>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .project-page { padding-top: 60px; padding-bottom: var(--pad-section); }
+  .head {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: var(--gap);
+    padding: 48px 0 32px;
+    border-bottom: 1px solid var(--rule);
+    margin-top: 32px;
+  }
+  .cat {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .head h1 { font-size: clamp(48px, 6vw, 96px); }
+  .meta {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--fg-muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-align: right;
+    margin: 0;
+  }
+  .meta dt { color: var(--fg-muted); }
+  .meta dd { color: var(--fg); margin: 0 0 8px; font-family: var(--serif); font-size: 16px; }
+
+  .body {
+    display: grid;
+    grid-template-columns: 7fr 5fr;
+    gap: var(--gap-wide);
+    margin-top: 48px;
+    align-items: start;
+  }
+  .gallery { display: grid; grid-template-columns: 1fr; gap: 16px; }
+  .gallery__item { position: relative; overflow: hidden; }
+  .text p { line-height: 1.6; max-width: 50ch; }
+  .facts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid var(--rule);
+  }
+  .facts dt {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+    margin-bottom: 4px;
+  }
+  .facts dd { font-family: var(--serif); font-size: 18px; margin: 0; }
+
+  @media (max-width: 768px) {
+    .head { grid-template-columns: 1fr; }
+    .meta { text-align: left; }
+    .body { grid-template-columns: 1fr; gap: 36px; }
+  }
+</style>

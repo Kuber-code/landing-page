@@ -1,0 +1,60 @@
+/* =========================================================================
+   Design tokens — single source of truth for every visual decision.
+   Overridden by [data-theme], [data-density], [data-dark] etc.
+   ========================================================================= */
+:root {
+  /* color (defaults match stone palette) */
+  --bg: #f5f4f0;
+  --fg: #1a1a1a;
+  --fg-muted: #6b6960;
+  --rule: #e2ded5;
+  --accent: #b8a898;
+  --img: #d8d4cc;
+  --img-2: #c9c3b7;
+  --invert-bg: #1a1a1a;
+  --invert-fg: #f5f4f0;
+  --invert-muted: #8e8c84;
+
+  /* typography */
+  --serif: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+  --sans: 'DM Sans', 'Inter', system-ui, sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, 'SF Mono', monospace;
+
+  /* scale */
+  --h1: clamp(56px, 9vw, 132px);
+  --h2: clamp(36px, 5.2vw, 76px);
+  --h3: clamp(22px, 2.2vw, 32px);
+  --h1-scale: 1;
+  --eyebrow: 12px;
+  --body: 17px;
+  --small: 13px;
+
+  /* spacing */
+  --pad-section: 160px;
+  --pad-section-m: 80px;
+  --pad-x: clamp(20px, 5vw, 80px);
+  --gap-tight: 14px;
+  --gap: 28px;
+  --gap-wide: 64px;
+
+  /* misc */
+  --nav-h: 72px;
+  --max-w: 1480px;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+[data-density='loose'] {
+  --pad-section: 200px;
+  --gap: 36px;
+  --gap-wide: 96px;
+}
+[data-density='medium'] {
+  --pad-section: 160px;
+  --gap: 28px;
+  --gap-wide: 64px;
+}
+[data-density='dense'] {
+  --pad-section: 96px;
+  --gap: 18px;
+  --gap-wide: 40px;
+}

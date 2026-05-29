@@ -1,0 +1,102 @@
+---
+import { t } from '@i18n';
+import type { Locale } from '@/types';
+import { Link, Tag } from '@components/ui';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+---
+
+<section id="about">
+  <div class="container">
+    <div class="section-head reveal">
+      <h2>{t(locale, 'about.title')}</h2>
+      <div class="meta">{t(locale, 'about.meta')}</div>
+    </div>
+
+    <div class="about__grid">
+      <div class="about__photo media reveal" data-label="portrait · 3:4" role="img" aria-label="Portrait photo placeholder"></div>
+
+      <div class="about__body reveal">
+        <p class="about__lead">{t(locale, 'about.p1')}</p>
+        <p>{t(locale, 'about.p2')}</p>
+        <p>{t(locale, 'about.p3')}</p>
+
+        <div class="about__stats">
+          <div class="stat">
+            <div class="stat__num" data-count="7">0</div>
+            <div class="stat__label">{t(locale, 'stat.years')}</div>
+          </div>
+          <div class="stat">
+            <div class="stat__num" data-count="34">0</div>
+            <div class="stat__label">{t(locale, 'stat.projects')}</div>
+          </div>
+          <div class="stat">
+            <div class="stat__num" data-count="12">0</div>
+            <div class="stat__label">{t(locale, 'stat.cities')}</div>
+          </div>
+        </div>
+
+        <div class="tags">
+          {['Revit', 'AutoCAD', 'Rhino', 'SketchUp', 'Adobe Suite', 'Enscape', 'ArchiCAD'].map((s) => <Tag>{s}</Tag>)}
+        </div>
+
+        <Link href="#" class="about__cv">{t(locale, 'about.cv')}</Link>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about__grid {
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+    gap: var(--gap-wide);
+    align-items: start;
+  }
+  .about__photo { aspect-ratio: 3/4; position: relative; }
+  .about__body { display: flex; flex-direction: column; gap: 28px; }
+  .about__body p {
+    font-size: clamp(17px, 1.3vw, 20px);
+    line-height: 1.65;
+    margin: 0;
+    max-width: 60ch;
+    text-wrap: pretty;
+  }
+  .about__lead::first-letter {
+    font-family: var(--serif);
+    font-size: 5em;
+    float: left;
+    line-height: 0.85;
+    padding: 8px 12px 0 0;
+    color: var(--accent);
+  }
+  .about__stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--gap);
+    margin-top: 12px;
+    padding-top: 32px;
+    border-top: 1px solid var(--rule);
+  }
+  .stat__num {
+    font-family: var(--serif);
+    font-size: clamp(48px, 5vw, 76px);
+    line-height: 1;
+    font-feature-settings: 'tnum' 1;
+  }
+  .stat__label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+    margin-top: 8px;
+  }
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .about__cv { align-self: flex-start; margin-top: 16px; }
+
+  @media (max-width: 768px) {
+    .about__grid { grid-template-columns: 1fr; }
+  }
+</style>

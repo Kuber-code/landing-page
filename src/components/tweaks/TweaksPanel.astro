@@ -1,0 +1,180 @@
+---
+/**
+ * Tweaks panel — floating control surface for design experiments.
+ * Stays a thin presentational layer; logic lives in @lib/tweaks.
+ */
+import { swapLocale } from '@i18n';
+import type { Locale } from '@/types';
+
+interface Props {
+  locale: Locale;
+  pathname: string;
+}
+const { locale, pathname } = Astro.props;
+
+const enHref = swapLocale(pathname, 'en');
+const plHref = swapLocale(pathname, 'pl');
+---
+
+<button class="tweaks-fab" id="tweaks-fab" aria-label="Open tweaks">
+  <span>Tweaks</span>
+</button>
+
+<aside class="tweaks" id="tweaks-panel" aria-label="Tweaks">
+  <div class="tweaks__head" data-tweak-drag>
+    <span class="tweaks__title">Tweaks</span>
+    <button class="tweaks__close" data-tweak-close aria-label="Close">✕</button>
+  </div>
+
+  <div class="tweaks__body">
+    <div class="tweaks__section">
+      <div class="tweaks__label">Palette</div>
+      <div class="tweaks__row" data-tweak-group="theme">
+        <button class="tweak-palette" data-val="stone" title="Stone" style="background: linear-gradient(to right, #F5F4F0 0 40%, #1A1A1A 40% 80%, #B8A898 80% 100%)"></button>
+        <button class="tweak-palette" data-val="cool" title="Cool" style="background: linear-gradient(to right, #F2F2F4 0 40%, #1C1D21 40% 80%, #9AA0A8 80% 100%)"></button>
+        <button class="tweak-palette" data-val="cream" title="Cream" style="background: linear-gradient(to right, #FAF7F2 0 40%, #161410 40% 80%, #C8A875 80% 100%)"></button>
+        <button class="tweak-palette" data-val="sage" title="Sage" style="background: linear-gradient(to right, #EEF0EB 0 40%, #1A1F1A 40% 80%, #8FA08C 80% 100%)"></button>
+      </div>
+    </div>
+
+    <div class="tweaks__section">
+      <div class="tweaks__label">Accent</div>
+      <div class="tweaks__row" data-tweak-group="accent">
+        <button class="tweak-swatch" data-val="sand" style="background:#B8A898"></button>
+        <button class="tweak-swatch" data-val="terracotta" style="background:#B66E4C"></button>
+        <button class="tweak-swatch" data-val="sage" style="background:#7E9A7F"></button>
+        <button class="tweak-swatch" data-val="navy" style="background:#3E5871"></button>
+      </div>
+    </div>
+
+    <div class="tweaks__section">
+      <div class="tweaks__label">Headline font</div>
+      <div class="tweaks__row" data-tweak-group="hfont">
+        <button class="tweak-chip" data-val="cormorant" style="font-family:'Cormorant Garamond',serif">Cormorant</button>
+        <button class="tweak-chip" data-val="playfair" style="font-family:'Playfair Display',serif">Playfair</button>
+        <button class="tweak-chip" data-val="fraunces" style="font-family:'Fraunces',serif">Fraunces</button>
+        <button class="tweak-chip" data-val="ebgaramond" style="font-family:'EB Garamond',serif">EB Garamond</button>
+      </div>
+    </div>
+
+    <div class="tweaks__section">
+      <div class="tweaks__label">Body font</div>
+      <div class="tweaks__row" data-tweak-group="bfont">
+        <button class="tweak-chip" data-val="dm" style="font-family:'DM Sans',sans-serif">DM Sans</button>
+        <button class="tweak-chip" data-val="inter" style="font-family:'Inter',sans-serif">Inter</button>
+        <button class="tweak-chip" data-val="plex" style="font-family:'IBM Plex Sans',sans-serif">Plex</button>
+        <button class="tweak-chip" data-val="sohne" style="font-family:'Manrope',sans-serif">Manrope</button>
+      </div>
+    </div>
+
+    <div class="tweaks__section">
+      <div class="tweaks__label">Hero layout</div>
+      <div class="tweaks__row" data-tweak-group="hero">
+        <button class="tweak-chip" data-val="split">Split</button>
+        <button class="tweak-chip" data-val="fullbleed">Full-bleed</button>
+        <button class="tweak-chip" data-val="typo">Typo</button>
+        <button class="tweak-chip" data-val="editorial">Editorial</button>
+      </div>
+    </div>
+
+    <div class="tweaks__section">
+      <div class="tweaks__label">Portfolio grid</div>
+      <div class="tweaks__row" data-tweak-group="grid">
+        <button class="tweak-chip" data-val="cols2">2-col</button>
+        <button class="tweak-chip" data-val="masonry">Masonry</button>
+        <button class="tweak-chip" data-val="editorial">Editorial</button>
+        <button class="tweak-chip" data-val="list">List</button>
+      </div>
+    </div>
+
+    <div class="tweaks__section">
+      <div class="tweaks__label">Density</div>
+      <div class="tweaks__row" data-tweak-group="density">
+        <button class="tweak-chip" data-val="loose">Loose</button>
+        <button class="tweak-chip" data-val="medium">Medium</button>
+        <button class="tweak-chip" data-val="dense">Dense</button>
+      </div>
+    </div>
+
+    <div class="tweaks__section">
+      <div class="tweaks__label">Image style</div>
+      <div class="tweaks__row" data-tweak-group="images">
+        <button class="tweak-chip" data-val="placeholder">Placeholder</button>
+        <button class="tweak-chip" data-val="mono">Mono</button>
+        <button class="tweak-chip" data-val="paper">Paper</button>
+      </div>
+    </div>
+
+    <div class="tweaks__section">
+      <div class="tweaks__label">Headline copy</div>
+      <div class="tweaks__row" data-tweak-group="headline">
+        <button class="tweak-chip" data-val="default">Architecture / with purpose.</button>
+        <button class="tweak-chip" data-val="spaces">Spaces / that work.</button>
+        <button class="tweak-chip" data-val="briefs">Buildings, briefs, / beauty.</button>
+      </div>
+    </div>
+
+    <div class="tweaks__section">
+      <div class="tweaks__label">
+        <span>Headline size</span>
+        <span class="mono" data-tweak-slider-val="headlineSize">100%</span>
+      </div>
+      <div class="tweak-slider">
+        <input type="range" min="60" max="160" step="5" value="100" data-tweak-slider="headlineSize" />
+      </div>
+    </div>
+
+    <div class="tweaks__section">
+      <button class="tweak-toggle" data-tweak-toggle="dark">
+        <span>Dark mode</span>
+        <span class="tweak-toggle__track" aria-hidden="true"></span>
+      </button>
+    </div>
+
+    <div class="tweaks__section">
+      <button class="tweak-toggle" data-tweak-toggle="eyebrow">
+        <span>Show 'Available' badge</span>
+        <span class="tweak-toggle__track" aria-hidden="true"></span>
+      </button>
+    </div>
+
+    <div class="tweaks__section">
+      <button class="tweak-toggle" data-tweak-toggle="reveal">
+        <span>Reveal on scroll</span>
+        <span class="tweak-toggle__track" aria-hidden="true"></span>
+      </button>
+    </div>
+
+    <div class="tweaks__section">
+      <div class="tweaks__label">Language</div>
+      <div class="tweaks__row">
+        <a class={`tweak-chip ${locale === 'en' ? 'is-active' : ''}`} href={enHref} data-astro-prefetch>English</a>
+        <a class={`tweak-chip ${locale === 'pl' ? 'is-active' : ''}`} href={plHref} data-astro-prefetch>Polski</a>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<script>
+  import {
+    TweaksController,
+    wireGroups,
+    wireToggles,
+    wireSlider,
+    wirePanelChrome,
+  } from '@lib/tweaks';
+
+  const init = () => {
+    const panel = document.getElementById('tweaks-panel');
+    const fab = document.getElementById('tweaks-fab');
+    if (!panel || !fab) return;
+    const ctrl = new TweaksController();
+    wireGroups(panel, ctrl);
+    wireToggles(panel, ctrl);
+    wireSlider(panel, ctrl);
+    wirePanelChrome(panel, fab);
+  };
+
+  init();
+  document.addEventListener('astro:after-swap', init);
+</script>

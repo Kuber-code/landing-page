@@ -1,0 +1,120 @@
+/* =========================================================================
+   Projects grid variants — switched via [data-grid] on <html>.
+   ========================================================================= */
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: var(--gap-wide);
+}
+.filter {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 8px 14px;
+  border: 1px solid var(--rule);
+  color: var(--fg-muted);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.25s var(--ease);
+}
+.filter:hover { border-color: var(--fg); color: var(--fg); }
+.filter.is-active {
+  background: var(--fg);
+  color: var(--bg);
+  border-color: var(--fg);
+}
+
+.projects-grid {
+  display: grid;
+  gap: var(--gap-wide) var(--gap);
+}
+
+[data-grid='cols2'] .projects-grid {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+[data-grid='masonry'] .projects-grid {
+  grid-template-columns: repeat(2, 1fr);
+  align-items: start;
+}
+[data-grid='masonry'] .project:nth-child(even) { margin-top: 80px; }
+[data-grid='masonry'] .project:nth-child(odd) .project__media { aspect-ratio: 4/5; }
+[data-grid='masonry'] .project:nth-child(even) .project__media { aspect-ratio: 3/2; }
+
+[data-grid='editorial'] .projects-grid {
+  grid-template-columns: repeat(12, 1fr);
+}
+[data-grid='editorial'] .project:nth-child(6n + 1) { grid-column: 1 / 8; }
+[data-grid='editorial'] .project:nth-child(6n + 1) .project__media { aspect-ratio: 16/10; }
+[data-grid='editorial'] .project:nth-child(6n + 2) { grid-column: 9 / 13; margin-top: 80px; }
+[data-grid='editorial'] .project:nth-child(6n + 2) .project__media { aspect-ratio: 3/4; }
+[data-grid='editorial'] .project:nth-child(6n + 3) { grid-column: 2 / 7; }
+[data-grid='editorial'] .project:nth-child(6n + 3) .project__media { aspect-ratio: 3/2; }
+[data-grid='editorial'] .project:nth-child(6n + 4) { grid-column: 8 / 13; margin-top: 120px; }
+[data-grid='editorial'] .project:nth-child(6n + 4) .project__media { aspect-ratio: 4/5; }
+[data-grid='editorial'] .project:nth-child(6n + 5) { grid-column: 1 / 6; }
+[data-grid='editorial'] .project:nth-child(6n + 5) .project__media { aspect-ratio: 4/3; }
+[data-grid='editorial'] .project:nth-child(6n + 6) { grid-column: 7 / 13; margin-top: 60px; }
+[data-grid='editorial'] .project:nth-child(6n + 6) .project__media { aspect-ratio: 3/2; }
+
+[data-grid='list'] .projects-grid {
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+[data-grid='list'] .project {
+  display: grid;
+  grid-template-columns: 80px 1fr 1fr auto;
+  align-items: center;
+  gap: var(--gap);
+  padding: 28px 0;
+  border-bottom: 1px solid var(--rule);
+}
+[data-grid='list'] .project__media,
+[data-grid='list'] .project__info {
+  display: none;
+}
+[data-grid='list'] .project__list-cat,
+[data-grid='list'] .project__list-title,
+[data-grid='list'] .project__list-year,
+[data-grid='list'] .project__num {
+  display: inline;
+}
+[data-grid='list'] .project__list-cat {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--accent);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+[data-grid='list'] .project__list-title { font-family: var(--serif); font-size: 28px; }
+[data-grid='list'] .project__list-year { font-family: var(--mono); font-size: 12px; color: var(--fg-muted); }
+[data-grid='list'] .project__num { font-family: var(--mono); font-size: 11px; color: var(--fg-muted); }
+[data-grid='list'] .project__arrow {
+  font-size: 22px;
+  color: var(--fg-muted);
+  transition: transform 0.25s, color 0.25s;
+}
+[data-grid='list'] .project:hover .project__arrow {
+  transform: translateX(6px);
+  color: var(--fg);
+}
+
+/* Non-list mode hides list-only fields */
+.project__list-cat,
+.project__list-title,
+.project__list-year,
+.project__num,
+.project__arrow {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  [data-grid='cols2'] .projects-grid,
+  [data-grid='masonry'] .projects-grid,
+  [data-grid='editorial'] .projects-grid {
+    grid-template-columns: 1fr;
+  }
+  [data-grid='editorial'] .project { grid-column: 1 / -1 !important; margin-top: 0 !important; }
+}

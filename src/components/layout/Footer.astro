@@ -1,0 +1,98 @@
+---
+import { t, localized } from '@i18n';
+import type { Locale } from '@/types';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const home = localized(locale, '/');
+---
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">{t(locale, 'brand')}</div>
+        <div class="footer__sub">{t(locale, 'footer.sub')}</div>
+      </div>
+      <div class="footer__col">
+        <h4>{t(locale, 'footer.nav')}</h4>
+        <a href={`${home}#work`}>{t(locale, 'nav.work')}</a>
+        <a href={`${home}#about`}>{t(locale, 'nav.about')}</a>
+        <a href={`${home}#contact`}>{t(locale, 'nav.contact')}</a>
+      </div>
+      <div class="footer__col">
+        <h4>{t(locale, 'footer.elsewhere')}</h4>
+        <a href="#" target="_blank" rel="noopener">LinkedIn ↗</a>
+        <a href="#" target="_blank" rel="noopener">Behance ↗</a>
+        <a href="mailto:agnieszka@email.com">Email ↗</a>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>{t(locale, 'footer.copy')}</span>
+      <span>{t(locale, 'footer.built')}</span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--invert-bg);
+    color: var(--invert-fg);
+    padding: 80px 0 32px;
+    border-top: 1px solid color-mix(in oklab, var(--invert-fg) 8%, transparent);
+  }
+  .footer__grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: var(--gap-wide);
+    align-items: start;
+  }
+  .footer__brand {
+    font-family: var(--serif);
+    font-size: 28px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .footer__sub {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--invert-muted);
+    margin-top: 10px;
+  }
+  .footer__col h4 {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--invert-muted);
+    margin-bottom: 18px;
+    font-weight: 500;
+  }
+  .footer__col a {
+    display: block;
+    padding: 4px 0;
+    color: var(--invert-fg);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+    width: fit-content;
+  }
+  .footer__col a:hover { border-bottom-color: var(--invert-fg); }
+  .footer__bottom {
+    margin-top: 64px;
+    padding-top: 24px;
+    border-top: 1px solid color-mix(in oklab, var(--invert-fg) 12%, transparent);
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--invert-muted);
+    letter-spacing: 0.06em;
+  }
+  @media (max-width: 768px) {
+    .footer__grid { grid-template-columns: 1fr; gap: 36px; }
+    .footer__bottom { flex-direction: column; gap: 8px; }
+  }
+</style>

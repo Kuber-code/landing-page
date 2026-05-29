@@ -1,0 +1,26 @@
+---
+import { t } from '@i18n';
+import type { Locale } from '@/types';
+import { getProjects } from '@lib';
+import ProjectCard from '@components/projects/ProjectCard.astro';
+import ProjectFilters from '@components/projects/ProjectFilters.astro';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const projects = await getProjects(locale);
+---
+
+<section id="work">
+  <div class="container">
+    <div class="section-head reveal">
+      <h2>{t(locale, 'work.title')}</h2>
+      <div class="meta">{t(locale, 'work.meta')}</div>
+    </div>
+
+    <ProjectFilters locale={locale} />
+
+    <div class="projects-grid">
+      {projects.map((p, i) => <ProjectCard project={p} index={i} locale={locale} />)}
+    </div>
+  </div>
+</section>

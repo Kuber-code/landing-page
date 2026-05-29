@@ -1,0 +1,20 @@
+---
+interface Props {
+  label?: string;
+  aspect?: string;
+  class?: string;
+}
+const { label, aspect = '3/2', class: className = '' } = Astro.props;
+---
+
+<div class={`media ${className}`} data-label={label} style={`aspect-ratio: ${aspect};`}>
+  <slot />
+</div>
+
+<style>
+  .media {
+    position: relative;
+    overflow: hidden;
+    /* color + ::before label set by themes via [data-images] in imagery.css */
+  }
+</style>

@@ -1,0 +1,114 @@
+---
+import { ClientRouter } from 'astro:transitions';
+import { INLINE_INIT_SCRIPT } from '@lib/tweaks';
+import { Nav, Footer } from '@components/layout';
+import { TweaksPanel } from '@components/tweaks';
+import { t, type UIKey, swapLocale } from '@i18n';
+import type { Locale } from '@/types';
+import '@styles/global.css';
+
+interface Props {
+  locale: Locale;
+  title?: string;
+  description?: string;
+}
+
+const { locale, title, description } = Astro.props;
+const pageTitle = title ?? `${t(locale, 'brand' as UIKey)} — ${t(locale, 'footer.sub')}`;
+const pageDesc = description ?? t(locale, 'hero.sub');
+const altPath = swapLocale(Astro.url.pathname, locale === 'en' ? 'pl' : 'en');
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={pageDesc} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate" hreflang={locale === 'en' ? 'pl' : 'en'} href={altPath} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;700&family=Playfair+Display:wght@400;700&family=Fraunces:opsz,wght@9..144,400;9..144,700&family=EB+Garamond:wght@400;500;700&family=DM+Sans:wght@400;500;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>{pageTitle}</title>
+
+    <!-- Anti-FOUC: apply persisted tweaks before paint -->
+    <script is:inline set:html={INLINE_INIT_SCRIPT} />
+
+    <ClientRouter />
+  </head>
+
+  <body>
+    <Nav locale={locale} />
+
+    <main id="top"><slot /></main>
+
+    <Footer locale={locale} />
+
+    <div class="cursor-dot" id="cursor-dot" aria-hidden="true">
+      <span>{t(locale, 'cursor.view')}</span>
+    </div>
+
+    <TweaksPanel locale={locale} pathname={Astro.url.pathname} />
+
+    <script>
+      import {
+        setupRevealObserver,
+        setupCursorFollower,
+        setupNavScroll,
+        setupCounters,
+        setupBadgeCycler,
+        setupActiveSections,
+      } from '@lib/behaviors';
+      import { BADGE_PHRASES } from '@i18n';
+
+      const boot = () => {
+        const locale = (document.documentElement.lang === 'pl' ? 'pl' : 'en') as 'en' | 'pl';
+        setupNavScroll();
+        setupActiveSections();
+        setupRevealObserver();
+        setupCursorFollower();
+        setupCounters();
+        setupBadgeCycler(BADGE_PHRASES[locale]);
+      };
+
+      boot();
+      document.addEventListener('astro:after-swap', boot);
+    </script>
+
+    <style>
+      .cursor-dot {
+        position: fixed;
+        pointer-events: none;
+        width: 84px;
+        height: 84px;
+        border-radius: 50%;
+        background: var(--fg);
+        color: var(--bg);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--mono);
+        font-size: 10px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        z-index: 60;
+        transform: translate(-50%, -50%) scale(0);
+        transition: transform 0.25s var(--ease), opacity 0.2s;
+        opacity: 0;
+      }
+      .cursor-dot.is-active {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+      }
+      @media (hover: none) {
+        .cursor-dot { display: none; }
+      }
+    </style>
+  </body>
+</html>

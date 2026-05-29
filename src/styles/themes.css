@@ -1,0 +1,93 @@
+/* =========================================================================
+   Palettes, accents, fonts, and dark-mode overrides.
+   Switched via data attributes on <html>.
+   ========================================================================= */
+
+/* ---- Palettes ---- */
+[data-theme='stone'] {
+  --bg: #f5f4f0;
+  --fg: #1a1a1a;
+  --fg-muted: #6b6960;
+  --rule: #e2ded5;
+  --img: #d8d4cc;
+  --img-2: #c9c3b7;
+}
+[data-theme='cool'] {
+  --bg: #f2f2f4;
+  --fg: #1c1d21;
+  --fg-muted: #6a6c74;
+  --rule: #e2e2e6;
+  --img: #d5d6da;
+  --img-2: #c6c7cc;
+}
+[data-theme='cream'] {
+  --bg: #faf7f2;
+  --fg: #161410;
+  --fg-muted: #6a6359;
+  --rule: #e8e2d7;
+  --img: #dcd3c2;
+  --img-2: #cdc2ae;
+}
+[data-theme='sage'] {
+  --bg: #eef0eb;
+  --fg: #1a1f1a;
+  --fg-muted: #5e6a5e;
+  --rule: #d9ded3;
+  --img: #cfd6c8;
+  --img-2: #bfc7b7;
+}
+
+/* ---- Accent swatches ---- */
+[data-accent='sand']       { --accent: #b8a898; }
+[data-accent='terracotta'] { --accent: #b66e4c; }
+[data-accent='sage']       { --accent: #7e9a7f; }
+[data-accent='navy']       { --accent: #3e5871; }
+
+/* ---- Headline font tweak ---- */
+[data-hfont='cormorant']  { --serif: 'Cormorant Garamond', Georgia, serif; }
+[data-hfont='playfair']   { --serif: 'Playfair Display', Georgia, serif; }
+[data-hfont='fraunces']   { --serif: 'Fraunces', Georgia, serif; }
+[data-hfont='ebgaramond'] { --serif: 'EB Garamond', Georgia, serif; }
+
+/* ---- Body font tweak ---- */
+[data-bfont='dm']    { --sans: 'DM Sans', system-ui, sans-serif; }
+[data-bfont='inter'] { --sans: 'Inter', system-ui, sans-serif; }
+[data-bfont='plex']  { --sans: 'IBM Plex Sans', system-ui, sans-serif; }
+[data-bfont='sohne'] { --sans: 'Manrope', system-ui, sans-serif; }
+
+/* ---- Dark mode (flips palette per theme) ---- */
+[data-dark='on'] {
+  --bg: #131313;
+  --fg: #f0ede6;
+  --fg-muted: #8e8b82;
+  --rule: #2a2825;
+  --img: #2a2724;
+  --img-2: #34302c;
+  --invert-bg: #f0ede6;
+  --invert-fg: #131313;
+  --invert-muted: #6b6960;
+}
+[data-dark='on'][data-theme='cool'] {
+  --bg: #101113;
+  --fg: #e8e9ec;
+  --fg-muted: #8a8c92;
+  --rule: #262830;
+  --img: #23252a;
+  --img-2: #2c2e34;
+}
+[data-dark='on'][data-theme='cream'] {
+  --bg: #161310;
+  --fg: #f2ebde;
+  --fg-muted: #8f877a;
+  --rule: #2d261d;
+  --img: #2a241b;
+  --img-2: #352d22;
+}
+[data-dark='on'][data-theme='sage'] {
+  --bg: #10130f;
+  --fg: #e8ece3;
+  --fg-muted: #7e867a;
+  --rule: #252a22;
+  --img: #21261e;
+  --img-2: #2a3026;
+}

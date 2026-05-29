@@ -1,0 +1,115 @@
+---
+import { Image } from 'astro:assets';
+import type { LocalizedProject } from '@lib/projects';
+import { getCover } from '@lib/projectImages';
+import { pad } from '@lib/utils';
+import { localized } from '@i18n';
+import type { Locale } from '@/types';
+
+interface Props {
+  project: LocalizedProject;
+  index: number;
+  locale: Locale;
+}
+
+const { project, index, locale } = Astro.props;
+const num = pad(index + 1);
+const href = localized(locale, `/projects/${project.slug}`);
+const cover = getCover(project.slug);
+---
+
+<a
+  class="project reveal"
+  data-cat={project.cat}
+  href={href}
+  data-astro-prefetch
+>
+  <span class="project__num">{num}</span>
+  <span class="project__list-cat">{project.cat}</span>
+  <span class="project__list-title">{project.name}</span>
+  <span class="project__list-year">{project.year}</span>
+
+  <div
+    class="project__media media"
+    data-cursor-hover
+    data-label={`${project.name} · ${project.cat} · ${project.year}`}
+    transition:name={`media-${project.slug}`}
+  >
+    {
+      cover && (
+        <Image
+          src={cover}
+          alt={project.name}
+          widths={[480, 960, 1440]}
+          sizes="(max-width: 768px) 100vw, 50vw"
+          loading={index < 2 ? 'eager' : 'lazy'}
+        />
+      )
+    }
+    <div class="project__overlay" aria-hidden="true">View Project →</div>
+  </div>
+
+  <div class="project__info">
+    <div>
+      <div class="project__cat">{project.cat}</div>
+      <div class="project__title" transition:name={`title-${project.slug}`}>{project.name}</div>
+    </div>
+    <div class="project__year">{project.year}</div>
+  </div>
+
+  <span class="project__arrow" aria-hidden="true">→</span>
+</a>
+
+<style>
+  .project {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    color: inherit;
+    text-decoration: none;
+  }
+  .project__media {
+    aspect-ratio: 3/2;
+    position: relative;
+  }
+  .project__media::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0);
+    transition: background 0.35s var(--ease);
+  }
+  .project:hover .project__media::after { background: rgba(0, 0, 0, 0.18); }
+  .project__overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--sans);
+    font-size: 14px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--invert-fg);
+    opacity: 0;
+    transition: opacity 0.35s var(--ease);
+    z-index: 1;
+  }
+  .project:hover .project__overlay { opacity: 1; }
+  .project__info {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--gap);
+  }
+  .project__title { font-family: var(--serif); font-size: clamp(22px, 1.8vw, 30px); }
+  .project__cat {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .project__year { font-family: var(--mono); font-size: 11px; color: var(--fg-muted); }
+</style>

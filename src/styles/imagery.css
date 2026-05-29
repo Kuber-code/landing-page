@@ -1,0 +1,75 @@
+/* =========================================================================
+   Real images — when a .media surface contains an <img> (project cards and
+   project detail galleries), the photo fills it and the placeholder label /
+   background are suppressed regardless of the [data-images] tweak.
+   ========================================================================= */
+.media > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.media:has(> img) {
+  background: none !important;
+}
+.media:has(> img)::before {
+  content: none !important;
+}
+
+/* =========================================================================
+   Placeholder media — three styles switched via [data-images].
+   Applies to .media surfaces (project cards, hero image, about photo).
+   ========================================================================= */
+[data-images='placeholder'] .media {
+  background: var(--img);
+}
+[data-images='placeholder'] .media::before {
+  content: attr(data-label);
+  position: absolute;
+  left: 14px;
+  bottom: 12px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: color-mix(in oklab, var(--fg) 50%, transparent);
+}
+
+[data-images='mono'] .media {
+  background:
+    radial-gradient(circle at 30% 30%, color-mix(in oklab, var(--fg) 35%, var(--img)) 0, transparent 50%),
+    linear-gradient(135deg, var(--img) 0%, var(--img-2) 100%);
+}
+[data-images='mono'] .media::before {
+  content: attr(data-label);
+  position: absolute;
+  left: 14px;
+  bottom: 12px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: color-mix(in oklab, var(--bg) 80%, transparent);
+}
+
+[data-images='paper'] .media {
+  background-color: var(--img);
+  background-image: repeating-linear-gradient(
+    135deg,
+    transparent 0 6px,
+    color-mix(in oklab, var(--fg) 4%, transparent) 6px 7px
+  );
+}
+[data-images='paper'] .media::before {
+  content: attr(data-label);
+  position: absolute;
+  left: 14px;
+  bottom: 12px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: color-mix(in oklab, var(--fg) 55%, transparent);
+}

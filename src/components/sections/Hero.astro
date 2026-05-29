@@ -1,0 +1,155 @@
+---
+import { t, HEADLINES } from '@i18n';
+import type { Locale } from '@/types';
+import type { HeadlineVariant } from '@/types/tweaks';
+import { DEFAULT_TWEAKS } from '@lib/tweaks';
+import { Button, Link, Eyebrow, PlaceholderMedia } from '@components/ui';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const variants: HeadlineVariant[] = ['default', 'spaces', 'briefs'];
+const initial = DEFAULT_TWEAKS.headline;
+---
+
+<section class="hero" id="hero">
+  <div class="hero__inner">
+    <div class="hero__text reveal">
+      <Eyebrow withRule>{t(locale, 'hero.eyebrow')}</Eyebrow>
+
+      <h1 id="hero-headline">
+        {
+          variants.map((v) => (
+            <span class="hl" data-variant={v} data-active={v === initial ? '' : null}>
+              <span class="hl__line1">{HEADLINES[v][locale][0]}</span>
+              <br />
+              <em class="hl__line2">{HEADLINES[v][locale][1]}</em>
+            </span>
+          ))
+        }
+      </h1>
+
+      <p class="hero__sub">{t(locale, 'hero.sub')}</p>
+
+      <div class="hero__cta">
+        <Button href="#contact">{t(locale, 'cta.book')}</Button>
+        <Link href="#work">{t(locale, 'cta.view')}</Link>
+      </div>
+
+      <dl class="hero__meta">
+        <div><dt>{t(locale, 'meta.role')}</dt><dd>{t(locale, 'meta.role.v')}</dd></div>
+        <div><dt>{t(locale, 'meta.based')}</dt><dd>Warsaw, PL</dd></div>
+        <div><dt>{t(locale, 'meta.exp')}</dt><dd>7+ years</dd></div>
+        <div><dt>{t(locale, 'meta.status')}</dt><dd>{t(locale, 'meta.status.v')}</dd></div>
+      </dl>
+    </div>
+
+    <PlaceholderMedia label="hero · portrait / signature project" aspect="3/4" class="hero__media reveal" />
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding-top: 60px;
+    padding-bottom: var(--pad-section);
+    min-height: calc(100vh - var(--nav-h));
+    display: flex;
+    align-items: stretch;
+  }
+  .hero__inner {
+    width: 100%;
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 0 var(--pad-x);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--gap-wide);
+    align-items: center;
+  }
+  .hero__text { display: flex; flex-direction: column; gap: 28px; }
+  .hero h1 { font-weight: 500; }
+  .hl { display: none; }
+  .hl[data-active] { display: inline; }
+  .hl__line2 { font-style: italic; font-weight: 400; color: var(--fg-muted); }
+  .hero__sub {
+    font-size: clamp(16px, 1.4vw, 19px);
+    color: var(--fg-muted);
+    max-width: 38ch;
+    margin: 0;
+  }
+  .hero__cta { display: flex; align-items: center; gap: 28px; flex-wrap: wrap; }
+
+  .hero__meta {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--gap);
+    margin: var(--gap-wide) 0 0;
+    padding-top: var(--gap);
+    border-top: 1px solid var(--rule);
+  }
+  .hero__meta dt {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+    margin-bottom: 6px;
+  }
+  .hero__meta dd { margin: 0; font-family: var(--serif); font-size: 22px; line-height: 1.1; }
+
+  /* ---- Hero layout variants ---- */
+  :global([data-hero='split']) .hero__inner { grid-template-columns: 1fr 1fr; align-items: stretch; }
+  :global([data-hero='split']) .hero__meta { display: none; }
+  :global([data-hero='split']) .hero__media { aspect-ratio: auto !important; min-height: 480px; }
+
+  :global([data-hero='editorial']) .hero__inner { grid-template-columns: 5fr 4fr; }
+
+  :global([data-hero='typo']) .hero__inner { grid-template-columns: 1fr; gap: 40px; }
+  :global([data-hero='typo']) .hero h1 { font-size: clamp(72px, 14vw, 220px); line-height: 0.92; }
+  :global([data-hero='typo']) .hero__media { aspect-ratio: 16/7 !important; max-width: 60%; margin-left: auto; }
+
+  :global([data-hero='fullbleed']) .hero { padding: 0; min-height: 100vh; position: relative; }
+  :global([data-hero='fullbleed']) .hero__inner {
+    grid-template-columns: 1fr;
+    max-width: none;
+    padding: 0;
+    position: relative;
+    height: 100vh;
+  }
+  :global([data-hero='fullbleed']) .hero__media {
+    position: absolute;
+    inset: 0;
+    aspect-ratio: auto !important;
+    width: 100%;
+    height: 100%;
+  }
+  :global([data-hero='fullbleed']) .hero__text {
+    position: absolute;
+    left: var(--pad-x);
+    right: var(--pad-x);
+    bottom: 80px;
+    z-index: 2;
+    background: color-mix(in oklab, var(--bg) 88%, transparent);
+    padding: 36px;
+    max-width: 720px;
+  }
+  :global([data-hero='fullbleed']) .hero__meta { display: none; }
+
+  /* ---- Headline variant toggle (driven by [data-headline]) ---- */
+  :global([data-headline='default']) .hl[data-variant='default'],
+  :global([data-headline='spaces']) .hl[data-variant='spaces'],
+  :global([data-headline='briefs']) .hl[data-variant='briefs'] {
+    display: inline;
+  }
+  :global([data-headline='default']) .hl:not([data-variant='default']),
+  :global([data-headline='spaces']) .hl:not([data-variant='spaces']),
+  :global([data-headline='briefs']) .hl:not([data-variant='briefs']) {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    .hero__inner { grid-template-columns: 1fr !important; gap: 40px; }
+    .hero__meta { grid-template-columns: repeat(2, 1fr) !important; }
+    :global([data-hero='fullbleed']) .hero__text { position: static; padding: 24px; }
+    :global([data-hero='typo']) .hero__media { max-width: 100%; }
+  }
+</style>

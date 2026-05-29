@@ -1,0 +1,51 @@
+---
+interface Props {
+  href?: string;
+  variant?: 'primary' | 'ghost' | 'invert';
+  class?: string;
+}
+
+const { href, variant = 'primary', class: className = '' } = Astro.props;
+const cls = ['btn', variant !== 'primary' && `btn--${variant}`, className]
+  .filter(Boolean)
+  .join(' ');
+const Tag = href ? 'a' : 'button';
+---
+
+<Tag class={cls} {...(href ? { href } : { type: 'button' })}>
+  <slot />
+</Tag>
+
+<style>
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 22px;
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    background: var(--fg);
+    color: var(--bg);
+    border: 1px solid var(--fg);
+    border-radius: 0;
+    transition:
+      transform 0.25s var(--ease),
+      background 0.25s var(--ease),
+      color 0.25s var(--ease);
+    white-space: nowrap;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  .btn:hover { transform: translateY(-1px); background: var(--accent); color: var(--fg); }
+  .btn--ghost {
+    background: transparent;
+    color: var(--fg);
+    padding: 10px 16px;
+    font-size: 13px;
+  }
+  .btn--ghost:hover { background: var(--fg); color: var(--bg); }
+  .btn--invert { background: var(--invert-fg); color: var(--invert-bg); border-color: var(--invert-fg); }
+  .btn--invert:hover { background: var(--accent); color: var(--invert-bg); }
+</style>

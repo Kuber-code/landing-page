@@ -1,0 +1,42 @@
+---
+import { t } from '@i18n';
+import type { UIKey } from '@i18n/ui';
+import { CATEGORIES } from '@/content.config';
+import type { Locale } from '@/types';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+---
+
+<div class="filters reveal" role="tablist" aria-label="Filter by category">
+  <button class="filter is-active" data-filter="all" type="button">
+    {t(locale, 'filter.all')}
+  </button>
+  {
+    CATEGORIES.map((c) => (
+      <button class="filter" data-filter={c} type="button">
+        {t(locale, `filter.${c}` as UIKey)}
+      </button>
+    ))
+  }
+</div>
+
+<script>
+  const init = () => {
+    const filters = document.querySelectorAll<HTMLButtonElement>('.filter');
+    const cards = document.querySelectorAll<HTMLElement>('.project');
+    if (filters.length === 0 || cards.length === 0) return;
+    filters.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const val = btn.dataset.filter ?? 'all';
+        filters.forEach((b) => b.classList.toggle('is-active', b === btn));
+        cards.forEach((c) => {
+          const match = val === 'all' || c.dataset.cat === val;
+          c.style.display = match ? '' : 'none';
+        });
+      });
+    });
+  };
+  init();
+  document.addEventListener('astro:after-swap', init);
+</script>

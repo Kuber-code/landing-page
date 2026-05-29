@@ -1,0 +1,159 @@
+---
+import { t, localized } from '@i18n';
+import type { Locale } from '@/types';
+import { Button } from '@components/ui';
+import AvailableBadge from './AvailableBadge.astro';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const home = localized(locale, '/');
+const work = `${home}#work`;
+const about = `${home}#about`;
+const contact = `${home}#contact`;
+---
+
+<header class="nav" id="nav">
+  <div class="nav__inner">
+    <a href={home} class="wordmark">{t(locale, 'brand')}</a>
+
+    <nav class="nav__links" aria-label="Primary">
+      <a href={work} class="nav__link" data-section="work">{t(locale, 'nav.work')}</a>
+      <a href={about} class="nav__link" data-section="about">{t(locale, 'nav.about')}</a>
+      <a href={contact} class="nav__link" data-section="contact">{t(locale, 'nav.contact')}</a>
+      <AvailableBadge locale={locale} />
+      <Button href={contact} variant="ghost">{t(locale, 'cta.book')}</Button>
+    </nav>
+
+    <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<nav class="mobile-menu" id="mobile-menu" aria-label="Mobile">
+  <a href={work}>{t(locale, 'nav.work')}</a>
+  <a href={about}>{t(locale, 'nav.about')}</a>
+  <a href={contact}>{t(locale, 'nav.contact')}</a>
+  <a href={contact}>{t(locale, 'cta.book')} →</a>
+</nav>
+
+<script>
+  const init = () => {
+    const hamb = document.getElementById('hamburger');
+    const mob = document.getElementById('mobile-menu');
+    if (!hamb || !mob) return;
+    const close = () => {
+      hamb.classList.remove('is-open');
+      mob.classList.remove('is-open');
+      hamb.setAttribute('aria-expanded', 'false');
+    };
+    hamb.addEventListener('click', () => {
+      const open = !hamb.classList.contains('is-open');
+      hamb.classList.toggle('is-open', open);
+      mob.classList.toggle('is-open', open);
+      hamb.setAttribute('aria-expanded', String(open));
+    });
+    mob.querySelectorAll('a').forEach((a) => a.addEventListener('click', close));
+  };
+  init();
+  document.addEventListener('astro:after-swap', init);
+</script>
+
+<style>
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    height: var(--nav-h);
+    display: flex;
+    align-items: center;
+    background: transparent;
+    border-bottom: 1px solid transparent;
+    transition: background 0.3s var(--ease), border-color 0.3s var(--ease), box-shadow 0.3s var(--ease);
+  }
+  .nav.is-scrolled {
+    background: color-mix(in oklab, var(--bg) 92%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom-color: var(--rule);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  }
+  .nav__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 0 var(--pad-x);
+  }
+  .wordmark {
+    font-family: var(--serif);
+    font-size: 20px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--fg);
+    text-decoration: none;
+  }
+  .nav__links { display: flex; align-items: center; gap: 36px; }
+  .nav__link {
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    position: relative;
+    padding: 4px 0;
+    color: var(--fg);
+    text-decoration: none;
+  }
+  .nav__link::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; bottom: -2px;
+    height: 1px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s var(--ease);
+  }
+  .nav__link:hover::after { transform: scaleX(1); }
+  .nav__link.is-active::after { transform: scaleX(1); }
+
+  .hamburger { display: none; width: 28px; height: 22px; position: relative; }
+  .hamburger span {
+    position: absolute; left: 0; right: 0;
+    height: 1.5px; background: var(--fg);
+    transition: transform 0.3s var(--ease), top 0.3s var(--ease), opacity 0.2s;
+  }
+  .hamburger span:nth-child(1) { top: 4px; }
+  .hamburger span:nth-child(2) { top: 10px; }
+  .hamburger span:nth-child(3) { top: 16px; }
+  .hamburger.is-open span:nth-child(1) { top: 10px; transform: rotate(45deg); }
+  .hamburger.is-open span:nth-child(2) { opacity: 0; }
+  .hamburger.is-open span:nth-child(3) { top: 10px; transform: rotate(-45deg); }
+
+  .mobile-menu {
+    position: fixed;
+    inset: var(--nav-h) 0 auto 0;
+    background: var(--bg);
+    border-bottom: 1px solid var(--rule);
+    padding: 24px var(--pad-x) 40px;
+    display: none;
+    flex-direction: column;
+    gap: 18px;
+    z-index: 49;
+  }
+  .mobile-menu.is-open { display: flex; }
+  .mobile-menu a {
+    font-family: var(--serif);
+    font-size: 32px;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 12px;
+    color: var(--fg);
+    text-decoration: none;
+  }
+
+  @media (max-width: 768px) {
+    .nav__links { display: none; }
+    .hamburger { display: block; }
+  }
+</style>
