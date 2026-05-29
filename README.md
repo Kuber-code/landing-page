@@ -38,7 +38,7 @@ src/
 │   ├── projects/     # ProjectCard, ProjectFilters
 │   └── tweaks/       # TweaksPanel (UI + protokół)
 ├── content/
-│   └── projects/     # 8 plików .md (Content Collection, schemat w content.config.ts)
+│   └── projects/     # 5 plików .md (Content Collection, schemat w content.config.ts)
 ├── i18n/             # UI strings (EN/PL), helpery, headline variants
 ├── layouts/          # BaseLayout
 ├── lib/
@@ -49,7 +49,7 @@ src/
 ├── pages/
 │   ├── [locale]/
 │   │   ├── index.astro            # /en, /pl
-│   │   └── projects/[slug].astro  # /en/projects/mokotow, /pl/projects/mokotow, …
+│   │   └── projects/[slug].astro  # /en/projects/zoliborz, /pl/projects/zoliborz, …
 ├── styles/
 │   ├── global.css    # entry — importuje pozostałe
 │   ├── tokens.css    # design tokens (--bg, --fg, …)
@@ -101,6 +101,22 @@ Astro native i18n routing (`astro.config.mjs`):
 - Toggle języka w panelu Tweaks zmienia trasę (`swapLocale(pathname, 'pl')`)
 
 Dodanie nowego języka: dopisz kod do `LOCALES` w `src/types/locale.ts`, dodaj klucze do `UI` i `HEADLINES`, uzupełnij `name` i `description` w plikach `.md`.
+
+---
+
+## 🏛️ Projekty w portfolio
+
+Aktualnie 5 realizacji (Content Collection w `src/content/projects/`):
+
+| Slug | Nazwa (EN) | Kategoria | Rok | Lokalizacja |
+|---|---|---|---|---|
+| `kamienica` | Kamienica Apartment | Interior Design | 2024 | Warsaw, PL |
+| `podgorze` | Podgórze Apartment | Interior Design | 2022 | Kraków, PL |
+| `tetmajera` | Tetmajera Apartment | Interior Design | 2023 | Kraków, PL |
+| `zakrzowek` | House on the Slope | Residential | 2023 | Kraków, PL |
+| `zoliborz` | Żoliborz House | Residential | 2024 | Warsaw, PL |
+
+Każdy projekt ma dwujęzyczne `name` i `description` (EN/PL) oraz zdjęcia w `src/assets/projects/<slug>/`.
 
 ---
 
