@@ -74,12 +74,13 @@ export const setupCounters = (root: ParentNode = document): void => {
         if (!en.isIntersecting) continue;
         const el = en.target as HTMLElement;
         const target = Number(el.dataset.count ?? '0');
+        const suffix = el.dataset.suffix ?? '';
         const start = performance.now();
         const dur = 1400;
         const step = (now: number) => {
           const p = Math.min(1, (now - start) / dur);
           const eased = 1 - Math.pow(1 - p, 3);
-          el.textContent = String(Math.round(target * eased)).padStart(2, '0');
+          el.textContent = String(Math.round(target * eased)).padStart(2, '0') + suffix;
           if (p < 1) requestAnimationFrame(step);
         };
         requestAnimationFrame(step);

@@ -3,7 +3,7 @@ import { t, HEADLINES } from '@i18n';
 import type { Locale } from '@/types';
 import type { HeadlineVariant } from '@/types/tweaks';
 import { DEFAULT_TWEAKS } from '@lib/tweaks';
-import { Button, Link, Eyebrow, PlaceholderMedia } from '@components/ui';
+import { Button, Link, Eyebrow } from '@components/ui';
 
 interface Props { locale: Locale }
 const { locale } = Astro.props;
@@ -37,13 +37,10 @@ const initial = DEFAULT_TWEAKS.headline;
 
       <dl class="hero__meta">
         <div><dt>{t(locale, 'meta.role')}</dt><dd>{t(locale, 'meta.role.v')}</dd></div>
-        <div><dt>{t(locale, 'meta.based')}</dt><dd>Warsaw, PL</dd></div>
-        <div><dt>{t(locale, 'meta.exp')}</dt><dd>7+ years</dd></div>
+        <div><dt>{t(locale, 'meta.exp')}</dt><dd>15+ years</dd></div>
         <div><dt>{t(locale, 'meta.status')}</dt><dd>{t(locale, 'meta.status.v')}</dd></div>
       </dl>
     </div>
-
-    <PlaceholderMedia label="hero · portrait / signature project" aspect="3/4" class="hero__media reveal" />
   </div>
 </section>
 
@@ -61,11 +58,11 @@ const initial = DEFAULT_TWEAKS.headline;
     margin: 0 auto;
     padding: 0 var(--pad-x);
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: var(--gap-wide);
     align-items: center;
   }
-  .hero__text { display: flex; flex-direction: column; gap: 28px; }
+  .hero__text { display: flex; flex-direction: column; gap: 28px; max-width: 820px; }
   .hero h1 { font-weight: 500; }
   .hl { display: none; }
   .hl[data-active] { display: inline; }
@@ -80,7 +77,7 @@ const initial = DEFAULT_TWEAKS.headline;
 
   .hero__meta {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: var(--gap);
     margin: var(--gap-wide) 0 0;
     padding-top: var(--gap);
@@ -96,10 +93,11 @@ const initial = DEFAULT_TWEAKS.headline;
   }
   .hero__meta dd { margin: 0; font-family: var(--serif); font-size: 22px; line-height: 1.1; }
 
-  /* ---- Hero layout variants ---- */
-  :global([data-hero='split']) .hero__inner { grid-template-columns: 1fr 1fr; align-items: stretch; }
-  :global([data-hero='split']) .hero__meta { display: none; }
-  :global([data-hero='split']) .hero__media { aspect-ratio: auto !important; min-height: 480px; }
+  /* ---- Hero layout variants ----
+     Media element is currently removed (awaiting hero video). The split/editorial
+     variants no longer apply two columns since there is nothing on the right. */
+  :global([data-hero='split']) .hero__inner { grid-template-columns: 1fr; align-items: start; }
+  :global([data-hero='split']) .hero__meta { display: grid; }
 
   :global([data-hero='editorial']) .hero__inner { grid-template-columns: 5fr 4fr; }
 

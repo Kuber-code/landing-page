@@ -12,6 +12,7 @@ export const CATEGORIES = [
   'Commercial',
   'Interior Design',
   'Urban & Public',
+  'Garden',
 ] as const;
 
 const projects = defineCollection({

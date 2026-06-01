@@ -1,7 +1,8 @@
 ---
+import { Image } from 'astro:assets';
 import { t } from '@i18n';
 import type { Locale } from '@/types';
-import { Link, Tag } from '@components/ui';
+import portrait from '@/assets/portrait.jpg';
 
 interface Props { locale: Locale }
 const { locale } = Astro.props;
@@ -15,20 +16,27 @@ const { locale } = Astro.props;
     </div>
 
     <div class="about__grid">
-      <div class="about__photo media reveal" data-label="portrait · 3:4" role="img" aria-label="Portrait photo placeholder"></div>
+      <div class="about__photo media reveal">
+        <Image
+          src={portrait}
+          alt="Agnieszka Wołczyk"
+          widths={[360, 720, 1075]}
+          sizes="(max-width: 1024px) 360px, 32vw"
+          loading="lazy"
+        />
+      </div>
 
       <div class="about__body reveal">
         <p class="about__lead">{t(locale, 'about.p1')}</p>
         <p>{t(locale, 'about.p2')}</p>
-        <p>{t(locale, 'about.p3')}</p>
 
         <div class="about__stats">
           <div class="stat">
-            <div class="stat__num" data-count="7">0</div>
+            <div class="stat__num" data-count="15">0</div>
             <div class="stat__label">{t(locale, 'stat.years')}</div>
           </div>
           <div class="stat">
-            <div class="stat__num" data-count="34">0</div>
+            <div class="stat__num" data-count="40" data-suffix="+">0</div>
             <div class="stat__label">{t(locale, 'stat.projects')}</div>
           </div>
           <div class="stat">
@@ -37,11 +45,10 @@ const { locale } = Astro.props;
           </div>
         </div>
 
-        <div class="tags">
-          {['Revit', 'AutoCAD', 'Rhino', 'SketchUp', 'Adobe Suite', 'Enscape', 'ArchiCAD'].map((s) => <Tag>{s}</Tag>)}
-        </div>
-
-        <Link href="#" class="about__cv">{t(locale, 'about.cv')}</Link>
+        <a class="text-link about__cv" href="/cv.pdf" download="CV_Agnieszka_Wolczyk.pdf">
+          <span>{t(locale, 'about.cv')}</span>
+          <span class="arrow">→</span>
+        </a>
       </div>
     </div>
   </div>
@@ -93,8 +100,23 @@ const { locale } = Astro.props;
     color: var(--fg-muted);
     margin-top: 8px;
   }
-  .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
-  .about__cv { align-self: flex-start; margin-top: 16px; }
+  .about__cv {
+    align-self: flex-start;
+    margin-top: 16px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding-bottom: 3px;
+    border-bottom: 1px solid var(--rule);
+    font-size: 14px;
+    letter-spacing: 0.02em;
+    color: inherit;
+    text-decoration: none;
+    transition: border-color 0.25s var(--ease), color 0.25s var(--ease);
+  }
+  .about__cv:hover { border-color: var(--fg); }
+  .about__cv .arrow { display: inline-block; transition: transform 0.25s var(--ease); }
+  .about__cv:hover .arrow { transform: translateX(4px); }
 
   /* ---- Tablet: stack portrait above text so the desktop range visibly responds ---- */
   @media (max-width: 1024px) {

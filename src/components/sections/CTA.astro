@@ -12,8 +12,8 @@ const { locale } = Astro.props;
     <Eyebrow>{t(locale, 'cta.eyebrow')}</Eyebrow>
     <h2>{t(locale, 'cta.title')}</h2>
     <p>{t(locale, 'cta.sub')}</p>
-    <Button href="#" variant="invert">{t(locale, 'cta.book30')}</Button>
-    <Link href="mailto:agnieszka@email.com">{t(locale, 'cta.email')}</Link>
+    <Button href={`mailto:agnieszka.wolczyk@gmail.com?subject=${encodeURIComponent('Meeting booking request')}`} variant="invert">{t(locale, 'cta.book30')}</Button>
+    <Link href="mailto:agnieszka.wolczyk@gmail.com">{t(locale, 'cta.email')}</Link>
   </div>
 </section>
 
