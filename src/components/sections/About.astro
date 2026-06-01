@@ -20,7 +20,7 @@ const { locale } = Astro.props;
         <Image
           src={portrait}
           alt="Agnieszka Wołczyk"
-          widths={[360, 720, 1075]}
+          widths={[360, 720, 1024]}
           sizes="(max-width: 1024px) 360px, 32vw"
           loading="lazy"
         />
@@ -68,7 +68,8 @@ const { locale } = Astro.props;
     line-height: 1.65;
     margin: 0;
     max-width: 60ch;
-    text-wrap: pretty;
+    text-align: justify;
+    hyphens: auto;
   }
   .about__lead::first-letter {
     font-family: var(--serif);

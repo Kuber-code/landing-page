@@ -19,6 +19,6 @@ export const HEADLINES: Record<HeadlineVariant, Record<Locale, HeadlineCopy>> = 
 } as const;
 
 export const BADGE_PHRASES: Record<Locale, readonly string[]> = {
-  en: ['Available for hire', 'Open to senior roles', 'Booking Q2 2025', 'Warsaw · Remote OK'],
-  pl: ['Dostępna do współpracy', 'Otwarta na stanowiska senior', 'Rezerwacje Q2 2025', 'Warszawa · Remote OK'],
+  en: ['Available for hire', 'Open to senior roles', 'Booking 2026', 'Remote OK'],
+  pl: ['Dostępna do współpracy', 'Otwarta na stanowiska senior', 'Rezerwacje 2026', 'Remote OK'],
 } as const;

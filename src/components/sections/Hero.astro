@@ -9,6 +9,7 @@ interface Props { locale: Locale }
 const { locale } = Astro.props;
 const variants: HeadlineVariant[] = ['default', 'spaces', 'briefs'];
 const initial = DEFAULT_TWEAKS.headline;
+const bookingUrl = 'https://mail.google.com/mail/?view=cm&fs=1&to=agnieszka.wolczyk@gmail.com&su=' + encodeURIComponent('Meeting booking request');
 ---
 
 <section class="hero" id="hero">
@@ -31,7 +32,7 @@ const initial = DEFAULT_TWEAKS.headline;
       <p class="hero__sub">{t(locale, 'hero.sub')}</p>
 
       <div class="hero__cta">
-        <Button href="#contact">{t(locale, 'cta.book')}</Button>
+        <Button href={bookingUrl} target="_blank" rel="noopener noreferrer">{t(locale, 'cta.book')}</Button>
         <Link href="#work">{t(locale, 'cta.view')}</Link>
       </div>
 

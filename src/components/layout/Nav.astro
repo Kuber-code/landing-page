@@ -10,6 +10,7 @@ const home = localized(locale, '/');
 const work = `${home}#work`;
 const about = `${home}#about`;
 const contact = `${home}#contact`;
+const bookingUrl = 'https://mail.google.com/mail/?view=cm&fs=1&to=agnieszka.wolczyk@gmail.com&su=' + encodeURIComponent('Meeting booking request');
 ---
 
 <header class="nav" id="nav">
@@ -21,7 +22,7 @@ const contact = `${home}#contact`;
       <a href={about} class="nav__link" data-section="about">{t(locale, 'nav.about')}</a>
       <a href={contact} class="nav__link" data-section="contact">{t(locale, 'nav.contact')}</a>
       <AvailableBadge locale={locale} />
-      <Button href={contact} variant="ghost">{t(locale, 'cta.book')}</Button>
+      <Button href={bookingUrl} variant="ghost" target="_blank" rel="noopener noreferrer">{t(locale, 'cta.book')}</Button>
     </nav>
 
     <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu">
@@ -34,7 +35,7 @@ const contact = `${home}#contact`;
   <a href={work}>{t(locale, 'nav.work')}</a>
   <a href={about}>{t(locale, 'nav.about')}</a>
   <a href={contact}>{t(locale, 'nav.contact')}</a>
-  <a href={contact}>{t(locale, 'cta.book')} →</a>
+  <a href={bookingUrl} target="_blank" rel="noopener noreferrer">{t(locale, 'cta.book')} →</a>
 </nav>
 
 <script>

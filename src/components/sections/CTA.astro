@@ -5,6 +5,8 @@ import { Button, Link, Eyebrow } from '@components/ui';
 
 interface Props { locale: Locale }
 const { locale } = Astro.props;
+const gmailBase = 'https://mail.google.com/mail/?view=cm&fs=1&to=agnieszka.wolczyk@gmail.com';
+const bookingUrl = `${gmailBase}&su=${encodeURIComponent('Meeting booking request')}`;
 ---
 
 <section class="cta" id="contact">
@@ -12,8 +14,8 @@ const { locale } = Astro.props;
     <Eyebrow>{t(locale, 'cta.eyebrow')}</Eyebrow>
     <h2>{t(locale, 'cta.title')}</h2>
     <p>{t(locale, 'cta.sub')}</p>
-    <Button href={`mailto:agnieszka.wolczyk@gmail.com?subject=${encodeURIComponent('Meeting booking request')}`} variant="invert">{t(locale, 'cta.book30')}</Button>
-    <Link href="mailto:agnieszka.wolczyk@gmail.com">{t(locale, 'cta.email')}</Link>
+    <Button href={bookingUrl} variant="invert" target="_blank" rel="noopener noreferrer">{t(locale, 'cta.book30')}</Button>
+    <Link href={gmailBase} target="_blank" rel="noopener noreferrer">{t(locale, 'cta.email')}</Link>
   </div>
 </section>
 
