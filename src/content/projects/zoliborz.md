@@ -1,11 +1,11 @@
 ---
-order: 1
+order: 8
 cat: Residential
-year: 2024
+year: 2017
 location: Warsaw, PL
 role: Lead architect
 type: Single-family house
-area: 180 m²
+area: 250 m²
 status: Visualisation
 team: Solo + contractors
 name:

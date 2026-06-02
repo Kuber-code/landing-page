@@ -1,11 +1,11 @@
 ---
-order: 3
+order: 1
 cat: Residential
-year: 2023
+year: 2026
 location: Kraków, PL
 role: Lead architect
 type: Single-family house
-area: 210 m²
+area: 250 m²
 status: Visualisation
 team: Solo + contractors
 name:

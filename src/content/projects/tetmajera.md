@@ -1,11 +1,11 @@
 ---
 order: 4
 cat: Interior Design
-year: 2023
+year: 2024
 location: Kraków, PL
 role: Interior designer
 type: Apartment
-area: 85 m²
+area: 120 m²
 status: Visualisation
 team: Solo + contractors
 name:

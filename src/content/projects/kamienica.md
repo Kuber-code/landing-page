@@ -1,23 +1,23 @@
 ---
-order: 2
+order: 6
 cat: Interior Design
-year: 2024
+year: 2022
 location: Warsaw, PL
 role: Interior designer
-type: Attic apartment
-area: 95 m²
+type: Tenement conversion
+area: 600 m²
 status: Visualisation
 team: Solo + contractors
 name:
-  en: Kamienica Apartment
-  pl: Apartament w kamienicy
+  en: Kamienica Apartments
+  pl: Apartamenty w kamienicy
 description:
   en:
-    - 'A top-floor apartment carved out of a historic tenement, where the original roof geometry becomes the defining feature: angled ceilings and a run of skylights wash the open kitchen and dining area in even, northern light.'
-    - Exposed brick and a single slab of veined marble anchor an otherwise restrained palette of graphite, white and warm oak.
+    - A 600-square-metre conversion of a historic Warsaw tenement into a set of apartments. The brief preserved the building's external character while reorganising the interior plans around how families actually live today.
+    - 'The renders shown here are the top-floor unit, where the original roof geometry becomes the defining feature: angled ceilings and skylights wash the open kitchen and dining area in even, northern light, anchored by exposed brick and a single slab of veined marble.'
   pl:
-    - 'Apartament na ostatniej kondygnacji wydzielony w zabytkowej kamienicy, w którym oryginalna geometria dachu staje się głównym motywem: skośne sufity i rząd okien połaciowych wypełniają otwartą kuchnię i jadalnię równomiernym, północnym światłem.'
-    - Odsłonięta cegła i pojedyncza płyta żyłkowanego marmuru kotwiczą powściągliwą paletę grafitu, bieli i ciepłego dębu.
+    - Konwersja zabytkowej warszawskiej kamienicy o powierzchni 600 m² na zespół apartamentów. Brief zachował zewnętrzny charakter budynku, jednocześnie reorganizując rzuty wnętrz wokół tego, jak współczesne rodziny rzeczywiście mieszkają.
+    - 'Pokazane wizualizacje to lokal na ostatniej kondygnacji, w którym oryginalna geometria dachu staje się głównym motywem: skośne sufity i okna połaciowe wypełniają otwartą kuchnię z jadalnią równomiernym, północnym światłem, kotwiczone odsłoniętą cegłą i pojedynczą płytą żyłkowanego marmuru.'
 ---
 
-<!-- TODO: Agnieszka — review. All copy and metadata (year, area, role, status) drafted from renders by Claude; confirm or correct before launch. -->
+<!-- TODO: Agnieszka — review. Renamed to "Kamienica Apartments" (plural) to reflect the 600 m² multi-unit project — was previously written as a single attic apartment. Confirm or refine. -->

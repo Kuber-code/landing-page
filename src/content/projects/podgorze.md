@@ -1,7 +1,7 @@
 ---
-order: 5
+order: 3
 cat: Interior Design
-year: 2022
+year: 2025
 location: Kraków, PL
 role: Interior designer
 type: Apartment
