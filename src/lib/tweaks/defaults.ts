@@ -1,17 +1,17 @@
 import type { TweakState } from '@/types/tweaks';
 
-export const STORAGE_KEY = 'aga.tweaks.v1';
+export const STORAGE_KEY = 'aga.tweaks.v2';
 
 export const DEFAULT_TWEAKS: TweakState = {
   theme: 'stone',
   accent: 'sand',
-  hfont: 'cormorant',
+  hfont: 'fraunces',
   bfont: 'dm',
   hero: 'split',
-  grid: 'masonry',
-  density: 'medium',
+  grid: 'cols2',
+  density: 'loose',
   images: 'placeholder',
-  headline: 'default',
+  headline: 'briefs',
   headlineSize: 100,
   dark: false,
   eyebrow: true,

@@ -1,5 +1,5 @@
 ---
-import { t, localized } from '@i18n';
+import { t, localized, swapLocale } from '@i18n';
 import type { Locale } from '@/types';
 import { Button } from '@components/ui';
 import AvailableBadge from './AvailableBadge.astro';
@@ -11,6 +11,8 @@ const work = `${home}#work`;
 const about = `${home}#about`;
 const contact = `${home}#contact`;
 const bookingUrl = 'https://mail.google.com/mail/?view=cm&fs=1&to=agnieszka.wolczyk@gmail.com&su=' + encodeURIComponent('Meeting booking request');
+const enHref = swapLocale(Astro.url.pathname, 'en');
+const plHref = swapLocale(Astro.url.pathname, 'pl');
 ---
 
 <header class="nav" id="nav">
@@ -21,6 +23,11 @@ const bookingUrl = 'https://mail.google.com/mail/?view=cm&fs=1&to=agnieszka.wolc
       <a href={work} class="nav__link" data-section="work">{t(locale, 'nav.work')}</a>
       <a href={about} class="nav__link" data-section="about">{t(locale, 'nav.about')}</a>
       <a href={contact} class="nav__link" data-section="contact">{t(locale, 'nav.contact')}</a>
+      <div class="lang" role="group" aria-label="Language">
+        <a href={enHref} class={`lang__btn ${locale === 'en' ? 'is-active' : ''}`} hreflang="en" aria-current={locale === 'en' ? 'page' : undefined}>EN</a>
+        <span class="lang__sep" aria-hidden="true">/</span>
+        <a href={plHref} class={`lang__btn ${locale === 'pl' ? 'is-active' : ''}`} hreflang="pl" aria-current={locale === 'pl' ? 'page' : undefined}>PL</a>
+      </div>
       <AvailableBadge locale={locale} />
       <Button href={bookingUrl} variant="ghost" target="_blank" rel="noopener noreferrer">{t(locale, 'cta.book')}</Button>
     </nav>
@@ -36,6 +43,11 @@ const bookingUrl = 'https://mail.google.com/mail/?view=cm&fs=1&to=agnieszka.wolc
   <a href={about}>{t(locale, 'nav.about')}</a>
   <a href={contact}>{t(locale, 'nav.contact')}</a>
   <a href={bookingUrl} target="_blank" rel="noopener noreferrer">{t(locale, 'cta.book')} →</a>
+  <div class="mobile-menu__lang" role="group" aria-label="Language">
+    <a href={enHref} class={`lang__btn ${locale === 'en' ? 'is-active' : ''}`} hreflang="en" aria-current={locale === 'en' ? 'page' : undefined}>EN</a>
+    <span class="lang__sep" aria-hidden="true">/</span>
+    <a href={plHref} class={`lang__btn ${locale === 'pl' ? 'is-active' : ''}`} hreflang="pl" aria-current={locale === 'pl' ? 'page' : undefined}>PL</a>
+  </div>
 </nav>
 
 <script>
@@ -118,6 +130,51 @@ const bookingUrl = 'https://mail.google.com/mail/?view=cm&fs=1&to=agnieszka.wolc
   }
   .nav__link:hover::after { transform: scaleX(1); }
   .nav__link.is-active::after { transform: scaleX(1); }
+
+  /* ---- Language switch ---- */
+  .lang {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 6px 10px;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    transition: border-color 0.25s var(--ease);
+  }
+  .lang:hover { border-color: color-mix(in oklab, var(--fg) 35%, transparent); }
+  .lang__btn {
+    color: var(--fg-muted);
+    text-decoration: none;
+    padding: 2px 4px;
+    transition: color 0.25s var(--ease);
+  }
+  .lang__btn:hover { color: var(--fg); }
+  .lang__btn.is-active {
+    color: var(--fg);
+    font-weight: 600;
+  }
+  .lang__btn[aria-current='page'] { pointer-events: none; }
+  .lang__sep { color: var(--rule); }
+
+  .mobile-menu__lang {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--mono);
+    font-size: 14px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-top: 8px;
+    padding: 10px 16px;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    width: fit-content;
+  }
+  .mobile-menu__lang .lang__btn { padding: 4px 8px; }
 
   .hamburger { display: none; width: 28px; height: 22px; position: relative; }
   .hamburger span {
