@@ -1,10 +1,11 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 
-const localizedString = z.object({ en: z.string(), pl: z.string() });
+const localizedString = z.object({ en: z.string(), pl: z.string(), de: z.string() });
 const localizedParagraphs = z.object({
   en: z.array(z.string()),
   pl: z.array(z.string()),
+  de: z.array(z.string()),
 });
 
 export const CATEGORIES = [

@@ -14,6 +14,7 @@ const { locale, pathname } = Astro.props;
 
 const enHref = swapLocale(pathname, 'en');
 const plHref = swapLocale(pathname, 'pl');
+const deHref = swapLocale(pathname, 'de');
 ---
 
 <button class="tweaks-fab" id="tweaks-fab" aria-label="Open tweaks">
@@ -150,6 +151,7 @@ const plHref = swapLocale(pathname, 'pl');
       <div class="tweaks__row">
         <a class={`tweak-chip ${locale === 'en' ? 'is-active' : ''}`} href={enHref} data-astro-prefetch>English</a>
         <a class={`tweak-chip ${locale === 'pl' ? 'is-active' : ''}`} href={plHref} data-astro-prefetch>Polski</a>
+        <a class={`tweak-chip ${locale === 'de' ? 'is-active' : ''}`} href={deHref} data-astro-prefetch>Deutsch</a>
       </div>
     </div>
   </div>

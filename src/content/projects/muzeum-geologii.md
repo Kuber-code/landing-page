@@ -11,6 +11,7 @@ team: Solo + contractors
 name:
   en: Museum of Geology
   pl: Muzeum Geologii
+  de: Museum für Geologie
 description:
   en:
     - 'A concept for a museum of geology on the Zakrzówek site in Kraków. A monumental cantilevered concrete frame opens onto a stone-strewn forecourt, framing a glazed inner room that reads as a sheltered geological display.'
@@ -18,6 +19,9 @@ description:
   pl:
     - 'Koncepcja muzeum geologii na terenie Zakrzówka w Krakowie. Monumentalna, wspornikowa konstrukcja betonowa otwiera się na kamienny przedplac, oprawiając przeszklone wnętrze, które czyta się jako zadaszona ekspozycja geologiczna.'
     - Architektura czerpie z kontekstu kamieniołomu — ciężka bryła, surowy kamień, linia horyzontu w postaci otwarcia, które stawia zwiedzającego wewnątrz skały, a nie przed nią.
+  de:
+    - 'Ein Konzept für ein Museum für Geologie auf dem Gelände Zakrzówek in Krakau. Ein monumentaler, auskragender Betonrahmen öffnet sich zu einem mit Steinen übersäten Vorplatz und umschließt einen verglasten Innenraum, der als geschützte geologische Ausstellung lesbar ist.'
+    - Die Architektur nimmt ihre Hinweise aus dem Kontext des Steinbruchs — schwere Masse, freigelegter Stein, eine horizontale Öffnung, die den Besucher in das Gestein hineinsetzt statt davor.
 ---
 
 <!-- TODO: Agnieszka — review. You did not specify the year or area for this project; Claude used 2024 and 1 200 m² as placeholders. Confirm or correct before launch. -->

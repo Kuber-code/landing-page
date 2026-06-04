@@ -13,6 +13,7 @@ const contact = `${home}#contact`;
 const bookingUrl = 'https://mail.google.com/mail/?view=cm&fs=1&to=agnieszka.wolczyk@gmail.com&su=' + encodeURIComponent('Meeting booking request');
 const enHref = swapLocale(Astro.url.pathname, 'en');
 const plHref = swapLocale(Astro.url.pathname, 'pl');
+const deHref = swapLocale(Astro.url.pathname, 'de');
 ---
 
 <header class="nav" id="nav">
@@ -27,6 +28,8 @@ const plHref = swapLocale(Astro.url.pathname, 'pl');
         <a href={enHref} class={`lang__btn ${locale === 'en' ? 'is-active' : ''}`} hreflang="en" aria-current={locale === 'en' ? 'page' : undefined}>EN</a>
         <span class="lang__sep" aria-hidden="true">/</span>
         <a href={plHref} class={`lang__btn ${locale === 'pl' ? 'is-active' : ''}`} hreflang="pl" aria-current={locale === 'pl' ? 'page' : undefined}>PL</a>
+        <span class="lang__sep" aria-hidden="true">/</span>
+        <a href={deHref} class={`lang__btn ${locale === 'de' ? 'is-active' : ''}`} hreflang="de" aria-current={locale === 'de' ? 'page' : undefined}>DE</a>
       </div>
       <AvailableBadge locale={locale} />
       <Button href={bookingUrl} variant="ghost" target="_blank" rel="noopener noreferrer">{t(locale, 'cta.book')}</Button>
@@ -47,6 +50,8 @@ const plHref = swapLocale(Astro.url.pathname, 'pl');
     <a href={enHref} class={`lang__btn ${locale === 'en' ? 'is-active' : ''}`} hreflang="en" aria-current={locale === 'en' ? 'page' : undefined}>EN</a>
     <span class="lang__sep" aria-hidden="true">/</span>
     <a href={plHref} class={`lang__btn ${locale === 'pl' ? 'is-active' : ''}`} hreflang="pl" aria-current={locale === 'pl' ? 'page' : undefined}>PL</a>
+    <span class="lang__sep" aria-hidden="true">/</span>
+    <a href={deHref} class={`lang__btn ${locale === 'de' ? 'is-active' : ''}`} hreflang="de" aria-current={locale === 'de' ? 'page' : undefined}>DE</a>
   </div>
 </nav>
 

@@ -11,6 +11,7 @@ team: Solo + contractors
 name:
   en: Podgórze Apartment
   pl: Apartament Podgórze
+  de: Apartment Podgórze
 description:
   en:
     - A 72-square-metre apartment in Kraków's Podgórze, planned around an open kitchen island that doubles as the social centre of the home. Warm oak fronts and fluted detailing soften a crisp white-and-black scheme.
@@ -18,6 +19,9 @@ description:
   pl:
     - Mieszkanie o powierzchni 72 m² w krakowskim Podgórzu, zaplanowane wokół otwartej wyspy kuchennej, która pełni rolę towarzyskiego centrum domu. Ciepłe, dębowe fronty i ryflowane detale łagodzą wyrazisty, biało-czarny schemat.
     - Zwisająca zieleń i trzy pendanty w klejnotowych barwach dodają ciepła i odrobiny zabawy uporządkowanej, wypełnionej światłem przestrzeni.
+  de:
+    - Eine 72 Quadratmeter große Wohnung im Krakauer Podgórze, geplant um eine offene Kücheninsel, die zugleich das gesellige Zentrum des Hauses bildet. Warme Eichenfronten und Riffelungen mildern ein klares Schwarz-Weiß-Schema.
+    - Hängendes Grün und drei juwelenfarbene Pendelleuchten bringen Wärme und etwas Spielerisches in einen sonst disziplinierten, lichtdurchfluteten Raum.
 ---
 
 <!-- TODO: Agnieszka — review. All copy and metadata (year, area, role, status) drafted from renders by Claude; confirm or correct before launch. -->

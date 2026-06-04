@@ -11,6 +11,7 @@ team: Collaboration with architectural office
 name:
   en: Adventure & Recreation Park
   pl: Park Przygody i Rekreacji
+  de: Abenteuer- & Erholungspark
 description:
   en:
     - A one-hectare adventure and recreation park in Kraków, developed in collaboration with an architectural office. The plan organises a network of pentagonal wooden pavilions — for seating, play and food trucks — set within ornamental grasses and meadow planting.
@@ -18,6 +19,9 @@ description:
   pl:
     - Park przygody i rekreacji o powierzchni jednego hektara w Krakowie, opracowany we współpracy z biurem architektonicznym. Plan organizuje sieć pięciokątnych drewnianych pawilonów — do siedzenia, zabawy i food trucków — osadzonych w trawach ozdobnych i łąkach kwietnych.
     - Powtarzający się motyw geometryczny nadaje parkowi jeden język wizualny, pozwalając każdemu modułowi pełnić inną rolę — od cichych, zacienionych ławek po aktywne struktury do zabawy.
+  de:
+    - Ein einen Hektar großer Abenteuer- und Erholungspark in Krakau, entwickelt in Zusammenarbeit mit einem Architekturbüro. Der Plan ordnet ein Netz aus fünfeckigen Holzpavillons — für Sitzgelegenheiten, Spiel und Food Trucks — eingebettet in Ziergräser und Wiesenbepflanzung.
+    - Die wiederholte Geometrie verleiht dem Park eine einheitliche visuelle Sprache und lässt zugleich jedes Modul eine andere Rolle einnehmen — von ruhigen Schattenbänken bis zu aktiven Spielstrukturen.
 ---
 
 <!-- TODO: Agnieszka — review. Copy drafted from project presentation sheets by Claude. Status set to "Built" since photos show real people on the modules — confirm or change. -->
