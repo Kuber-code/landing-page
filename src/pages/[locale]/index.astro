@@ -2,7 +2,7 @@
 import type { GetStaticPaths } from 'astro';
 import { LOCALES, type Locale } from '@/types';
 import BaseLayout from '@layouts/BaseLayout.astro';
-import { Hero, Specializations, Projects, About, CTA } from '@components/sections';
+import { Hero, HeroReel, Specializations, Projects, About, CTA } from '@components/sections';
 
 export const getStaticPaths = (() =>
   LOCALES.map((locale) => ({ params: { locale } }))) satisfies GetStaticPaths;
@@ -11,7 +11,8 @@ const locale = Astro.params.locale as Locale;
 ---
 
 <BaseLayout locale={locale}>
-  <Hero locale={locale} />
+  <Hero locale={locale} compact={true} />
+  <HeroReel src="/kolaz.mp4" />
   <Specializations locale={locale} />
   <Projects locale={locale} />
   <About locale={locale} />

@@ -11,7 +11,7 @@ export const DEFAULT_TWEAKS: TweakState = {
   grid: 'cols2',
   density: 'loose',
   images: 'placeholder',
-  headline: 'briefs',
+  headline: 'default',
   headlineSize: 100,
   dark: false,
   eyebrow: true,

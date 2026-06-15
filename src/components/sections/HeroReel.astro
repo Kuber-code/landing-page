@@ -1,0 +1,46 @@
+---
+interface Props { src?: string }
+const { src = '/reel.mp4' } = Astro.props;
+---
+
+<div class="reel-wrap">
+  <video
+    class="reel-video"
+    src={src}
+    autoplay
+    muted
+    loop
+    playsinline
+    preload="metadata"
+  ></video>
+</div>
+
+<style>
+  .reel-wrap {
+    width: 100%;
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 0 var(--pad-x);
+    padding-bottom: var(--pad-section);
+  }
+  .reel-video {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: block;
+    border-radius: 4px;
+    aspect-ratio: 3420 / 2420;
+    object-fit: cover;
+    background: var(--img);
+  }
+
+  @media (max-width: 768px) {
+    .reel-wrap {
+      padding-left: 0;
+      padding-right: 0;
+    }
+    .reel-video {
+      border-radius: 0;
+    }
+  }
+</style>

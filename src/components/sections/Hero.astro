@@ -5,14 +5,14 @@ import type { HeadlineVariant } from '@/types/tweaks';
 import { DEFAULT_TWEAKS } from '@lib/tweaks';
 import { Button, Link, Eyebrow } from '@components/ui';
 
-interface Props { locale: Locale }
-const { locale } = Astro.props;
+interface Props { locale: Locale; compact?: boolean }
+const { locale, compact = false } = Astro.props;
 const variants: HeadlineVariant[] = ['default', 'spaces', 'briefs'];
 const initial = DEFAULT_TWEAKS.headline;
 const bookingUrl = 'https://mail.google.com/mail/?view=cm&fs=1&to=agnieszka.wolczyk@gmail.com&su=' + encodeURIComponent('Meeting booking request');
 ---
 
-<section class="hero" id="hero">
+<section class="hero" id="hero" data-compact={compact ? '' : null}>
   <div class="hero__inner">
     <div class="hero__text reveal">
       <Eyebrow withRule>{t(locale, 'hero.eyebrow')}</Eyebrow>
@@ -53,6 +53,9 @@ const bookingUrl = 'https://mail.google.com/mail/?view=cm&fs=1&to=agnieszka.wolc
     display: flex;
     align-items: stretch;
   }
+  /* Compact hero (variant B): drop the full-viewport height so the video band
+     that follows sits right under the meta instead of after a tall empty gap. */
+  .hero[data-compact] { min-height: 0; padding-bottom: var(--gap-wide); }
   .hero__inner {
     width: 100%;
     max-width: var(--max-w);

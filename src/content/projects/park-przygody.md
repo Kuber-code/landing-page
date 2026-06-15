@@ -1,6 +1,6 @@
 ---
 order: 7
-cat: Garden
+cat: Urban & Public
 year: 2019
 location: Kraków, PL
 role: Lead architect
