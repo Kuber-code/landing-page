@@ -10,6 +10,7 @@ const items = [
   { n: '02', t: t(locale, 'spec.2.t'), d: t(locale, 'spec.2.d') },
   { n: '03', t: t(locale, 'spec.3.t'), d: t(locale, 'spec.3.d') },
   { n: '04', t: t(locale, 'spec.4.t'), d: t(locale, 'spec.4.d') },
+  { n: '05', t: t(locale, 'spec.5.t'), d: t(locale, 'spec.5.d') },
 ];
 ---
 
@@ -50,7 +51,9 @@ const items = [
     border-top: 1px solid var(--rule);
     border-bottom: 1px solid var(--rule);
   }
-  /* 4 cards → clean 2×2 grid, fully symmetric. */
+  /* 5 cards: 2×2 grid + a full-width 5th so no half-empty cell is left. */
+  .spec:last-child { grid-column: 1 / -1; }
+  .spec:last-child .spec__desc { max-width: 76ch; }
   .spec {
     background: var(--bg);
     padding: 48px 36px 56px;
